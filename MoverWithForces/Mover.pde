@@ -60,4 +60,24 @@ class Mover {
        velocity.y *= -1;
     }
   }
+  
+  boolean isInsideLiquid(Liquid liquid) {
+    if (location.x > liquid.x && location.x < (liquid.x + liquid.width) && location.y > liquid.y && location.y < (liquid.y + liquid.height)) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  void drag(Liquid liquid) {
+    float speed = velocity.mag();
+    float dragMagnitude = liquid.dragCoefficient * speed * speed;
+    
+    PVector drag = velocity.copy();
+    drag.mult(-1);
+    drag.normalize();
+    drag.mult(dragMagnitude);
+    
+    applyForce(drag);
+  }
 }
