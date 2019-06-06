@@ -13,9 +13,19 @@ void draw() {
   
   PVector f = a.attract(m);
   m.applyForce(f);
-  
   m.update();
+  
+  a.drag();
+  a.hover(mouseX, mouseY);
   
   a.display();
   m.display();
+}
+
+void mousePressed() {
+  a.clicked(mouseX, mouseY);
+}
+
+void mouseReleased() {
+  a.stopDragging();
 }
